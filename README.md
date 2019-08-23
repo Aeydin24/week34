@@ -32,6 +32,8 @@ Kunne redegøre for korrekt JSON syntaks
 Kunne redegøre for Data Tranfer Objects (DTO's) og serialisering mellem Java objekter og JSON
 Kunne konvertere frem og tilbage mellem Java objekter og JSON i egen kode
 
+OBS: Small mistakes in the database put address = last name. I don't care to be honest.
+
 ## Day 5 project ## 
 1. Finished all of it [Deployment](http://benjaminbajrami.dk:8080/jpa_rest_day5-1.0/api/bankcustomer/all)
 2.[Here](https://github.com/Aeydin24/week34/tree/master/04%20friday-exercises/week1day5)
