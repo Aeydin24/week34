@@ -3,8 +3,6 @@ Excercises for Week-34 - First Week - Flow 1 - 2019
 
 Day one - Set up
 
-[Domain](http://benjaminbajrami.dk)
-
 [Droplet](http://benjaminbajrami.dk:8080/)
 
 Questions
