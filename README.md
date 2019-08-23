@@ -24,7 +24,7 @@ Questions
 3. Oprette et Java projekt med REST endpoints. Implementere kode indeholdende de mest grundlæggende REST annotationer (GET kun). Håndtere parametre i REST endpoints i egne kodeeksempler. Redegøre for, og demonstrere det udleverede start project til brug for JPA/REST-projekter.
 
 ## Day 4 ## 
-1. Finished all of it. [Deployment](http://benjaminbajrami.dk:8080/Employees/api/employee/highestpaid) (you can use /all, /id and others to get the rest of the endpoints.)
+1. Finished all of it. [Deployment](http://benjaminbajrami.dk:8080/employee/api/employee/highestpaid) (you can use /all, /id and others to get the rest of the endpoints.)
 2. [Here](https://github.com/Aeydin24/week34/tree/master/03%20thursday-exercises/week1day4)
 3. Designe simple GET-endpoints med brug af en underliggende database tilgået via JPA
 Kunne redegøre for nødvendigheden af i brug af JSON

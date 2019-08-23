@@ -39,36 +39,33 @@ public class EmployeeFacade {
         return emf.createEntityManager();
     }
     
-    public EmployeeDTO findEmployeeById(int id){
+    public Employee findEmployeeById(int id){
          EntityManager em = emf.createEntityManager();
         try{
             Employee emp = em.find(Employee.class,id);
-            EmployeeDTO edto = new EmployeeDTO(emp);
-            return edto;
+            return emp;
         }finally {
             em.close();
         }
     }
     
-    public List<EmployeeDTO> findEmployeeByName(String name) {
+    public List<Employee> findEmployeeByName(String name) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Employee> query = em.createQuery("SELECT b FROM Employee b WHERE b.name = :name",Employee.class)
                     .setParameter("name", name);
-            List<EmployeeDTO> emp = new ArrayList(query.getResultList());
-            return emp;
+            return query.getResultList();
         } finally {
         em.close();
     }
 }
     
-    public List<EmployeeDTO> getAllEmployees () {
+    public List<Employee> getAllEmployees () {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Employee> query
                     = em.createQuery("Select e from Employee e", Employee.class);
-            List<EmployeeDTO> emp = new ArrayList(query.getResultList());
-            return emp;
+            return query.getResultList();
         } finally {
             em.close();
         }
@@ -85,13 +82,12 @@ public class EmployeeFacade {
             em.close();
         }
     }
-    public List<EmployeeDTO> employeeWithHighestSalary() {
+    public List<Employee> employeeWithHighestSalary() {
         EntityManager em = getEntityManager();
         try {
             TypedQuery <Employee> query 
                     = em.createQuery("SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(z.salary) FROM Employee z)", Employee.class);
-            List<EmployeeDTO> cust = new ArrayList(query.getResultList());
-            return cust;
+            return query.getResultList();
         } finally {
         em.close();
     }

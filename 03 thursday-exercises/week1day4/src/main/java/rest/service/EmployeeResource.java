@@ -1,8 +1,10 @@
 package rest.service;
 
 import com.google.gson.Gson;
+import dto.EmployeeDTO;
 import entities.Employee;
 import facades.EmployeeFacade;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,25 +32,42 @@ public class EmployeeResource {
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
-        return gson.toJson(facade.getAllEmployees());
-    }
+        List<Employee> emp = facade.getAllEmployees();
+        List<EmployeeDTO> edto = new ArrayList();
+        
+        for(Employee e : emp)
+            edto.add(new EmployeeDTO(e));
+        return gson.toJson(edto);
+        }
+        
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public String demo2(@PathParam("id") int id) {
-        return gson.toJson(facade.findEmployeeById(id));
+        return gson.toJson(new EmployeeDTO(facade.findEmployeeById(id)));
     }
+
     @GET
     @Path("/highestpaid")
     @Produces({MediaType.APPLICATION_JSON})
     public String demo3() {
-        return gson.toJson(facade.employeeWithHighestSalary());
+        List<Employee> emp = facade.employeeWithHighestSalary();
+        List<EmployeeDTO> empdto = new ArrayList<>();
+        for(Employee e : emp) {
+            empdto.add(new EmployeeDTO(e));
+        }
+        return gson.toJson(empdto);
     }
     @GET
     @Path("names/{name}")
     @Produces({MediaType.APPLICATION_JSON})
     public String demo4(@PathParam("name")String name) {
-        return gson.toJson(facade.findEmployeeByName(name));
+        List<Employee> emp = facade.findEmployeeByName(name);
+        List<EmployeeDTO> empdto = new ArrayList();
+        for(Employee e : emp) {
+            empdto.add(new EmployeeDTO(e));
+        }
+        return gson.toJson(empdto);
     }
     
     @GET
@@ -58,10 +77,10 @@ public class EmployeeResource {
                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
         EntityManager em = emf.createEntityManager();
         try {
-            Employee bc1 = new Employee("Jenni", "Hansen", "66346");
-            Employee bc2 = new Employee("Sten","Frederiksen","20000");
-            Employee bc3 = new Employee("Tom","Mikkelsen","3265456");
-            Employee bc4 = new Employee("Dorte","Jørgensen","664345");
+            Employee bc1 = new Employee("Jenni Hansen", "Ostemadsvej 3452", "66346");
+            Employee bc2 = new Employee("Sten Frederiksen","Frederiksundsvej 43","20000");
+            Employee bc3 = new Employee("Tom Mikkelsen","Bangsbovej 435","3265456");
+            Employee bc4 = new Employee("Dorte Jørgensen","Lundebjerg 582","664345");
             em.getTransaction().begin(); //begin transaction
             em.persist(bc1);
             em.persist(bc2);
