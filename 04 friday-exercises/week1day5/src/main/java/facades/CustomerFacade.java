@@ -51,24 +51,22 @@ public class CustomerFacade {
         }
     }
 
-    public CustomerDTO getCustomerById(long id) {
+    public BankCustomer getCustomerById(long id) {
         EntityManager em = emf.createEntityManager();
         try {
             BankCustomer customer = em.find(BankCustomer.class, id);
-            CustomerDTO cust = new CustomerDTO(customer);
-            return cust;
+            return customer;
         } finally {
             em.close();
         }
     }
 
-    public List<CustomerDTO> getCustomerByName(String firstName) {
+    public List<BankCustomer> getCustomerByName(String firstName) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<BankCustomer> query = em.createQuery("SELECT c FROM CustomerDTO c WHERE c.firstname = :firstname", BankCustomer.class)
                     .setParameter("firstname", firstName);
-            List<CustomerDTO> cust = new ArrayList(query.getResultList());
-            return cust;
+            return query.getResultList();
         } finally {
             em.close();
         }
