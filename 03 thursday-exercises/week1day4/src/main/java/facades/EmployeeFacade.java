@@ -79,15 +79,15 @@ public class EmployeeFacade {
             em.close();
         }
     }
-//    public Employee employeeWithHighestSalary() {
-//        EntityManager em = getEntityManager();
-//        try {
-//            TypedQuery query = em.createQuery("SELECT b FROM Employee b WHERE b.salary < :salary",Employee.class)
-//                    .setParameter("salary", salary);
-//            return query.getResultList();
-//        } finally {
-//        em.close();
-//    }
-//        
-//    }
+    public List<Employee> employeeWithHighestSalary() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery <Employee> query 
+                    = em.createQuery("SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(z.salary) FROM Employee z)", Employee.class);
+            return query.getResultList();
+        } finally {
+        em.close();
+    }
+        
+    }
 }

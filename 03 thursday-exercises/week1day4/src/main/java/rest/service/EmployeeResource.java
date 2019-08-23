@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("employee")
-public class RenameMeResource {
+public class EmployeeResource {
 
     EntityManagerFactory emf; 
     EmployeeFacade facade =  EmployeeFacade.getFacadeExample(emf);
@@ -26,7 +26,7 @@ public class RenameMeResource {
     @GET
     @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
-    public String demo() {
-        return "{\"msg\":\"succes\"}";
+    public List<Employee> demo() {
+        return facade.getAllEmployees();
     }
 }
