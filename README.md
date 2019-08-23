@@ -32,7 +32,7 @@ Kunne redegøre for korrekt JSON syntaks
 Kunne redegøre for Data Tranfer Objects (DTO's) og serialisering mellem Java objekter og JSON
 Kunne konvertere frem og tilbage mellem Java objekter og JSON i egen kode
 
-OBS: Small mistakes in the database put address = last name. I don't care to be honest.
+OBS: Small mistakes in the database put address = last name. I don't care to be honest. Also I created the DTO in the facade. I don't know the difference, but it saved me a lot of time to do it this way rather than filling the DTO's in the REST endpoint.
 
 ## Day 5 project ## 
 1. Finished all of it [Deployment](http://benjaminbajrami.dk:8080/jpa_rest_day5-1.0/api/bankcustomer/all)
