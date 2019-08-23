@@ -1,6 +1,8 @@
 package facades;
 
+import dto.EmployeeDTO;
 import entities.Employee;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,7 +27,7 @@ public class EmployeeFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static EmployeeFacade getFacadeExample(EntityManagerFactory _emf) {
+    public static EmployeeFacade getEmployeeFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
             instance = new EmployeeFacade();
@@ -37,32 +39,36 @@ public class EmployeeFacade {
         return emf.createEntityManager();
     }
     
-    public Employee findCustomerById(int id){
+    public EmployeeDTO findEmployeeById(int id){
          EntityManager em = emf.createEntityManager();
         try{
-            Employee customer = em.find(Employee.class,id);
-            return customer;
+            Employee emp = em.find(Employee.class,id);
+            EmployeeDTO edto = new EmployeeDTO(emp);
+            return edto;
         }finally {
             em.close();
         }
     }
     
-    public List<Employee> findCustomerByName(String name) {
+    public List<EmployeeDTO> findEmployeeByName(String name) {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Employee> query = em.createQuery("SELECT b FROM Employee b WHERE b.name = :name",Employee.class)
                     .setParameter("name", name);
-            return query.getResultList();
+            List<EmployeeDTO> emp = new ArrayList(query.getResultList());
+            return emp;
         } finally {
         em.close();
     }
 }
     
-    public List<Employee> getAllEmployees () {
+    public List<EmployeeDTO> getAllEmployees () {
         EntityManager em = getEntityManager();
         try {
-            List<Employee> employees = em.createQuery("SELECT e FROM Employee e").getResultList();
-            return employees;
+            TypedQuery<Employee> query
+                    = em.createQuery("Select e from Employee e", Employee.class);
+            List<EmployeeDTO> emp = new ArrayList(query.getResultList());
+            return emp;
         } finally {
             em.close();
         }
@@ -79,12 +85,13 @@ public class EmployeeFacade {
             em.close();
         }
     }
-    public List<Employee> employeeWithHighestSalary() {
+    public List<EmployeeDTO> employeeWithHighestSalary() {
         EntityManager em = getEntityManager();
         try {
             TypedQuery <Employee> query 
                     = em.createQuery("SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(z.salary) FROM Employee z)", Employee.class);
-            return query.getResultList();
+            List<EmployeeDTO> cust = new ArrayList(query.getResultList());
+            return cust;
         } finally {
         em.close();
     }

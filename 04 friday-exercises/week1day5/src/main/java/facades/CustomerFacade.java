@@ -40,13 +40,12 @@ public class CustomerFacade {
     }
 
     public BankCustomer addCustomer(BankCustomer cust) {
-        BankCustomer customer = new BankCustomer();
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(customer);
+            em.persist(cust);
             em.getTransaction().commit();
-            return customer;
+            return cust;
         } finally {
             em.close();
         }
